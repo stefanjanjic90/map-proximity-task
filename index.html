@@ -1,0 +1,56 @@
+<!doctype html>
+<html ng-app="mapApp">
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+    crossorigin="anonymous">
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
+  <style>
+    #map {
+      height: 100%;
+    }
+
+    /* Optional: Makes the sample page fill the window. */
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      position: relative;
+    }
+
+    .marker-list ul {
+      width: 200px;
+      height: auto;
+      top: 70px;
+      right: 20px;
+      position: absolute;
+      background: white;
+      z-index: 999999999;
+    }
+  </style>
+</head>
+
+<body ng-controller="RootAppController">
+  <div class="marker-list">
+    <ul>
+      <li ng-repeat="location in selectedLocations" ng-click="zoomToLocation(location)">{{location.locationData.name}}</li>
+    </ul>
+  </div>
+  <div id="map" map locations="breweryLocations" google-map-object="mapObject" on-cluster-selected="onClusterSelected(selectedLocations)" zoom-location="zoomLocation"></div>
+
+  <script src="./main.js"></script>
+  <script src="./services/open-brewery.service.js"></script>
+  <script src="./directives/map/map.directive.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAusKq__vEvGY9zG9yoqcArEb4tjJcKYrc&callback=initMap"></script>
+  <script src="./@google/marker-clusters/markerclusterer.js"></script>
+  
+</body>
+
+</html>
